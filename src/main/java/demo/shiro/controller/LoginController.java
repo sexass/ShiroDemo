@@ -3,6 +3,8 @@ package demo.shiro.controller;
 import demo.shiro.entity.UserModel;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.*;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.apache.shiro.subject.Subject;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,5 +41,48 @@ public class LoginController {
             return "success";
         }
         return null;
+    }
+
+    /**
+     * 要求角色admin
+     */
+    @RequestMapping(value = "/testRole",method = RequestMethod.GET)
+    @RequiresRoles("admin")
+    public String testRole(){
+        return "test role success!";
+    }
+
+    /**
+     * 要求权限user:view
+     */
+    @RequestMapping(value = "/testPermission",method = RequestMethod.GET)
+    @RequiresPermissions("user:view")
+    public String testPermission(){
+        return "test permission success!";
+    }
+
+    /**
+     * 登出
+     */
+    @RequestMapping(value = "/logout",method = RequestMethod.GET)
+    public String logout(){
+        SecurityUtils.getSubject().logout();
+        return "logout success!";
+    }
+
+    /**
+     * 无权限链接
+     */
+    @RequestMapping("/403")
+    public String unauthorizedRole(){
+        return "没有访问权限";
+    }
+
+    /**
+     * 不拦截链接
+     */
+    @RequestMapping("/helloWorld")
+    public String helloWorld(){
+        return "hello world!";
     }
 }

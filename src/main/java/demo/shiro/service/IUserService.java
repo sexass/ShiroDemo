@@ -1,6 +1,9 @@
 package demo.shiro.service;
 
+import demo.shiro.entity.RoleModel;
 import demo.shiro.entity.UserModel;
+
+import java.util.List;
 
 /**
  * UserService
@@ -10,4 +13,6 @@ import demo.shiro.entity.UserModel;
  **/
 public interface IUserService {
     UserModel findByUserName(String userName);
+
+    List<RoleModel> getRolesByUserName(String userName);
 }
