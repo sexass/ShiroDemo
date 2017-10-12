@@ -19,6 +19,11 @@ public class RolePermissionDaoImpl implements IRolePermissionDao {
     @Autowired
     EntityManager entityManager;
 
+    /**
+     * 根据角色获取权限
+     * @param roles
+     * @return
+     */
     public List<String> getPermissionByRoles(Set<String> roles) {
         String sql="select p.permission_name permissionName from shiro_role r,shiro_permission p where r.id=p.role_id and r.role_name in (:roles)";
         Query query=entityManager.createNativeQuery(sql);

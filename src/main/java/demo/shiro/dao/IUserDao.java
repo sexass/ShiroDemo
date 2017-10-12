@@ -13,6 +13,11 @@ import org.springframework.data.repository.query.Param;
  * @create 2017-10-11 15:21
  **/
 public interface IUserDao extends JpaRepository<UserModel,Long> {
+    /**
+     * 根据用户名获取用户
+     * @param userName
+     * @return
+     */
     @Query("from UserModel u where u.userName=:userName")
     UserModel findByUserName(@Param(value = "userName") String userName);
 }

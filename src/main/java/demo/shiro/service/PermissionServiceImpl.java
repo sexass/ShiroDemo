@@ -18,6 +18,11 @@ public class PermissionServiceImpl implements IPermissionService {
     @Autowired
     private IRolePermissionDao rolePermissionDao;
 
+    /**
+     * 根据角色获取权限
+     * @param roles
+     * @return
+     */
     public List<String> getPermissionByRole(Set<String> roles) {
         return rolePermissionDao.getPermissionByRoles(roles);
     }

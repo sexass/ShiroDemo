@@ -18,6 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginController {
 
+    /**
+     * 登录
+     * @param user
+     * @return
+     */
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public String login(@RequestBody UserModel user){
         UsernamePasswordToken usernamePasswordToken=new UsernamePasswordToken(user.getUserName(),user.getPassword());
@@ -44,7 +49,7 @@ public class LoginController {
     }
 
     /**
-     * 要求角色admin
+     * 测试角色权限（要求角色admin）
      */
     @RequestMapping(value = "/testRole",method = RequestMethod.GET)
     @RequiresRoles("admin")
@@ -53,7 +58,7 @@ public class LoginController {
     }
 
     /**
-     * 要求权限user:view
+     * 测试详细权限（要求权限user:view）
      */
     @RequestMapping(value = "/testPermission",method = RequestMethod.GET)
     @RequiresPermissions("user:view")

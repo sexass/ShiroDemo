@@ -21,6 +21,11 @@ public class UserRoleDaoImpl implements IUserRoleDao {
     @Autowired
     EntityManager entityManager;
 
+    /**
+     * 根据用户名获取角色
+     * @param userName
+     * @return
+     */
     public List<RoleModel> getRolesByUserName(String userName) {
         String sql="select r.id id,r.role_name roleName from shiro_user u,shiro_role r,shiro_user_role ur " +
                 "where u.id=ur.user_id and r.id=ur.role_id and u.user_name=:userName";

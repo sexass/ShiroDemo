@@ -18,3 +18,7 @@ spring:
   output:
     ansi:
       enabled: ALWAYS
+
+auth.loginUrl: /login #登录链接
+auth.unauthorizedUrl: /403 #没有权限跳转链接
+auth.filterString: /logout=logout;/403=anon;/helloWorld=anon;/**=authc  #过滤器配置,/**写在最后

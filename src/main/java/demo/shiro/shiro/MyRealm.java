@@ -31,6 +31,11 @@ public class MyRealm extends AuthorizingRealm {
     @Autowired
     private IPermissionService permissionService;
 
+    /**
+     * 权限验证
+     * @param principalCollection
+     * @return
+     */
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         UserModel landingUser= (UserModel) principalCollection.getPrimaryPrincipal();
         if(landingUser!=null){
@@ -40,11 +45,15 @@ public class MyRealm extends AuthorizingRealm {
             for(RoleModel r:roleList){
                 roles.add(r.getRoleName());
             }
-            info.setRoles(roles);
-            List<String> permissions=permissionService.getPermissionByRole(roles);
-            Set<String> permissionSet=new HashSet<String>();
-            permissionSet.addAll(permissions);
-            info.setStringPermissions(permissionSet);
+            if(roles.size()!=0) {
+                info.setRoles(roles);
+                List<String> permissions = permissionService.getPermissionByRole(roles);
+                Set<String> permissionSet = new HashSet<String>();
+                permissionSet.addAll(permissions);
+                if (permissionSet.size() != 0) {
+                    info.setStringPermissions(permissionSet);
+                }
+            }
             return info;
         }
         return null;

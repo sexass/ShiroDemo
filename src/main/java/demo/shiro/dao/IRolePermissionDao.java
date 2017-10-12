@@ -10,5 +10,10 @@ import java.util.Set;
  * @create 2017-10-12 9:27
  **/
 public interface IRolePermissionDao {
+    /**
+     * 根据角色获取权限
+     * @param roles
+     * @return
+     */
     List<String> getPermissionByRoles(Set<String> roles);
 }

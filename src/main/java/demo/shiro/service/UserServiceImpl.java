@@ -20,10 +20,20 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     private IUserRoleDao userRoleDao;
 
+    /**
+     * 根据用户名寻找用户
+     * @param userName
+     * @return
+     */
     public UserModel findByUserName(String userName) {
         return userDao.findByUserName(userName);
     }
 
+    /**
+     * 根据用户名获取角色
+     * @param userName
+     * @return
+     */
     public List<RoleModel> getRolesByUserName(String userName) {
         return userRoleDao.getRolesByUserName(userName);
     }
